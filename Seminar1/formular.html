@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Pagina de test</title>
+    </head>
+    <body>
+        <h1>Un titlu</h1>
+        <h2>Subtitlu 1</h2>
+        <p>
+            <a href="https://ase.ro" target="_blank">
+            Un text 
+            a &lt; b 
+            a &amp; b
+            </a>
+        </p>
+        <h2>Subtitlu 2</h2>
+        <p>Alt text</p>
+        <p>
+            <strong>Ana</strong> are <br />
+            <em>mere</em>.
+        </p>
+        <ul>
+            <li>Primul element</li>
+            <li>Al doilea element</li>
+            <li>Al treilea element</li>
+        </ul>
+
+        <form method="get" action="http://ase.softmentor.ro:81/Home/ExecutaOperatie">
+            <input type="text" name="operand1" value="" />
+            <select name="operatie">
+                <option value="plus">+</option>
+                <option value="minus">-</option>
+                <option value="inmultit">*</option>
+                <option value="impartit">/</option>
+            </select>
+            <input type="text" name="operand2" value="" />
+            <input type="hidden" name="raspunsText" value="true" />
+            <input type="submit" value="Trimite">
+        </form>
+    </body>
+</html>
