@@ -63,3 +63,5 @@ yarn.lock
 coverage/
 .playwright/
 .cypress/
+
+.prettierrc
