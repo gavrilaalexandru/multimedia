@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript">
+      function incrementare(e) {
+        let paragraf = document.querySelector('p');
+        let valoare = parseInt(paragraf.innerText);
+        valoare += e.metaKey ? 10 : 1; // nu am ctrl pe mac
+        paragraf.innerText = valoare;
+
+        let paragrafNou = document.createElement('p');
+        paragrafNou.innerText = `Valoarea noua este ${valoare}`;
+        document.body.appendChild(paragrafNou);
+      }
+
+      function aplicatie() {
+        let buton = document.querySelector('input');
+        buton.addEventListener('click', incrementare);
+      }
+      document.addEventListener('DOMContentLoaded', aplicatie);
+    </script>
+  </head>
+  <body>
+    <p>1</p>
+    <input type="button" value="Incrementare" />
+  </body>
+</html>
