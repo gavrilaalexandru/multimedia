@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studenti</title>
+    <style type="text/css">
+      #btnVizualizare {
+        color: red;
+        border: 2px solid red;
+        padding: 10px;
+        font-weight: bold;
+        font-family: Arial;
+      }
+    </style>
+    <script>
+      let date = [
+        { student: 'Ana', materie: 'Matematica', an: 2022, nota: 9 },
+        { student: 'Ion', materie: 'Matematica', an: 2022, nota: 7 },
+        { student: 'Maria', materie: 'Matematica', an: 2022, nota: 10 },
+        { student: 'Ana', materie: 'Fizica', an: 2022, nota: 8 },
+        { student: 'Ion', materie: 'Fizica', an: 2022, nota: 6 },
+        { student: 'Maria', materie: 'Fizica', an: 2022, nota: 9 },
+        { student: 'Ana', materie: 'Matematica', an: 2023, nota: 10 },
+        { student: 'Ion', materie: 'Matematica', an: 2023, nota: 8 },
+        { student: 'Maria', materie: 'Matematica', an: 2023, nota: 9 },
+        { student: 'Ana', materie: 'Fizica', an: 2023, nota: 9 },
+        { student: 'Ion', materie: 'Fizica', an: 2023, nota: 7 },
+        { student: 'Maria', materie: 'Fizica', an: 2023, nota: 10 },
+      ];
+
+      document.addEventListener('DOMContentLoaded', () => {
+        let btnMaxim = document.getElementById('btnMaxim');
+        btnMaxim.addEventListener('click', () => {
+          let notaMax = date[0];
+          for (let i = 1; i < date.length; i++) {
+            if (date[i].nota > notaMax.nota) {
+              notaMax = date[i];
+            }
+          }
+          let paragrafVechi = document.getElementById('paragrafNotaMax');
+          if (paragrafVechi) paragrafVechi.remove();
+          let paragraf = document.createElement('p');
+          paragraf.innerText = `Nota maxima a fost obtinuta de ${notaMax.student} la materia ${notaMax.materie} in anul ${notaMax.an} si este nota ${notaMax.nota}`;
+          paragraf.id = 'paragrafNotaMax';
+          document.body.appendChild(paragraf);
+        });
+        let btnVizualizare = document.getElementById('btnVizualizare');
+        btnVizualizare.addEventListener('click', () => {
+          let select = document.getElementById('selectAn');
+          let an = parseInt(select.value);
+          let dateFiltrate = date.filter((item) => item.an === an);
+          let tableBody = document.getElementById('tableBody');
+          tableBody.innerHTML = '';
+          for (let item of dateFiltrate) {
+            let tr = document.createElement('tr');
+            let tdStudent = document.createElement('td');
+            tdStudent.innerText = item.student;
+            let tdMaterie = document.createElement('td');
+            tdMaterie.innerText = item.materie;
+            let tdAn = document.createElement('td');
+            tdAn.innerText = item.an;
+            let tdNota = document.createElement('td');
+            tdNota.innerText = item.nota;
+            tr.append(tdStudent, tdMaterie, tdAn, tdNota);
+            tableBody.append(tr);
+          }
+        });
+        let btnMedie = document.getElementById('btnMedie');
+        btnMedie.addEventListener('click', () => {
+          let select = document.getElementById('selectAn');
+          let an = parseInt(select.value);
+          let dateFiltrate = date.filter((item) => item.an === an);
+          let suma = dateFiltrate.reduce(
+            (accumulator, currentValue) => accumulator + currentValue.nota,
+            0
+          );
+          let medie = suma / dateFiltrate.length;
+          let paragrafVechi = document.getElementById('paragrafMedie');
+          if (paragrafVechi) paragrafVechi.remove();
+          let paragrafMedie = document.createElement('p');
+          paragrafMedie.innerText = `Media notelor in anul ${an} este: ${medie.toFixed(
+            2
+          )}`;
+          paragrafMedie.id = 'paragrafMedie';
+          document.body.appendChild(paragrafMedie);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <select id="selectAn">
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+    </select>
+
+    <input type="button" id="btnVizualizare" value="Vizualizare" />
+    <input type="button" id="btnMaxim" value="Maxim" />
+    <input type="button" id="btnMedie" value="Medie" />
+
+    <table>
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Materie</th>
+          <th>An</th>
+          <th>Nota</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </body>
+</html>
