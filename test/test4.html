@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multimedia</title>
+    <style type="text/css"></style>
+    <script type="text/javascript">
+      const discipline = [
+        { disciplina: 'Multimedia', nota: 3 },
+        { disciplina: 'Java', nota: 10 },
+        { disciplina: 'POO', nota: 9 },
+      ];
+
+      function adaugaInTabel(vector) {
+        let table = document.querySelector('table');
+        let tbody = document.getElementById('tbody');
+        tbody.innerHTML = '';
+        for (let item of vector) {
+          let tr = document.createElement('tr');
+          let tdDisciplina = document.createElement('td');
+          tdDisciplina.innerText = item.disciplina;
+          let tdNota = document.createElement('td');
+          tdNota.innerText = item.nota;
+          tr.append(tdDisciplina, tdNota);
+          tbody.append(tr);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        adaugaInTabel(discipline);
+        let btnAdauga = document.getElementById('btnAdauga');
+        btnAdauga.addEventListener('click', () => {
+          let select = document.getElementById('selectMaterie');
+          let materie = select.value;
+          let inputNota = document.getElementById('notaInput');
+          let nota = parseFloat(inputNota.value);
+          discipline.push({ disciplina: materie, nota: nota });
+          adaugaInTabel(discipline);
+        });
+        let tbody = document.getElementById('tbody');
+        tbody.addEventListener('click', (event) => {
+          const target = event.target;
+          target.style.backgroundColor = 'yellow';
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <select id="selectMaterie">
+      <option value="Multimedia">Multimedia</option>
+      <option value="POO">POO</option>
+      <option value="Java">Java</option>
+    </select>
+    <br />
+    <br />
+    <label for="notaInput">Nota</label>
+    <input type="text" id="notaInput" placeholder="Introdu nota" />
+    <br />
+    <br />
+    <input type="button" id="btnAdauga" value="Adauga" />
+
+    <br />
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>Disciplina</th>
+          <th>Nota</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </body>
+</html>
