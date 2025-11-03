@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Populatie</title>
+    <style type="text/css">
+      #btnVizualizare {
+        color: green;
+        font-weight: bold;
+        font-family: Arial;
+        border: 2px solid green;
+      }
+    </style>
+    <script type="text/javascript">
+      let date = [
+        { tara: 'BG', an: 2013, pop: 11137974 },
+
+        { tara: 'BG', an: 2014, pop: 11180840 },
+
+        { tara: 'BG', an: 2015, pop: 11237274 },
+
+        { tara: 'BG', an: 2016, pop: 11311117 },
+
+        { tara: 'BG', an: 2017, pop: 11351727 },
+
+        { tara: 'BG', an: 2018, pop: 11398589 },
+
+        { tara: 'HU', an: 2013, pop: 2971905 },
+
+        { tara: 'HU', an: 2014, pop: 2943472 },
+
+        { tara: 'HU', an: 2015, pop: 2921262 },
+
+        { tara: 'HU', an: 2016, pop: 2888558 },
+
+        { tara: 'HU', an: 2017, pop: 2847904 },
+
+        { tara: 'HU', an: 2018, pop: 2808901 },
+
+        { tara: 'RO', an: 2013, pop: 10487289 },
+
+        { tara: 'RO', an: 2014, pop: 10427301 },
+
+        { tara: 'RO', an: 2015, pop: 10374822 },
+
+        { tara: 'RO', an: 2016, pop: 10341330 },
+
+        { tara: 'RO', an: 2017, pop: 10309573 },
+
+        { tara: 'RO', an: 2018, pop: 10291027 },
+      ];
+
+      document.addEventListener('DOMContentLoaded', () => {
+        let btnMaxim = document.getElementById('btnMaxim');
+        btnMaxim.addEventListener('click', () => {
+          let popMax = date[0];
+          for (let i = 1; i < date.length; i++) {
+            if (date[i].pop > popMax.pop) {
+              popMax = date[i];
+            }
+          }
+          let paragrafVechi = document.getElementById('paragrafMaxim');
+          if (paragrafVechi) paragrafVechi.remove();
+          let paragraf = document.createElement('p');
+          paragraf.innerText = `Populatia maxima a fost atinsa in anul ${popMax.an} in tara ${popMax.tara}`;
+          paragraf.id = 'paragrafMaxim';
+          document.body.appendChild(paragraf);
+        });
+        let btnVizualizare = document.getElementById('btnVizualizare');
+        btnVizualizare.addEventListener('click', () => {
+          let select = document.getElementById('selectAn');
+          let anSelectat = parseInt(select.value);
+          let dateFiltrate = date.filter((item) => item.an === anSelectat);
+          let lista = document.getElementById('lista');
+          lista.innerHTML = '';
+          for (let i = 0; i < dateFiltrate.length; i++) {
+            let li = document.createElement('li');
+            li.innerText = `${dateFiltrate[i].tara} - ${dateFiltrate[i].pop} locuitori`;
+            lista.append(li);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <select id="selectAn">
+      <option value="2013">2013</option>
+      <option value="2014">2014</option>
+      <option value="2015">2015</option>
+      <option value="2016">2016</option>
+      <option value="2017">2017</option>
+      <option value="2018">2018</option>
+    </select>
+
+    <ul id="lista"></ul>
+
+    <input type="button" id="btnVizualizare" value="Vizualizare" />
+    <input type="button" id="btnMaxim" value="Maxim" />
+  </body>
+</html>
