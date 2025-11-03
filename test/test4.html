@@ -40,8 +40,9 @@
         });
         let tbody = document.getElementById('tbody');
         tbody.addEventListener('click', (event) => {
-          const target = event.target;
-          target.style.backgroundColor = 'yellow';
+          target = event.target;
+          // target.closest('tr').remove();
+          // target.style.backgroundColor = 'yellow';
         });
       });
     </script>
