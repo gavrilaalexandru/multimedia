@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanzari</title>
+  </head>
+  <style type="text/css">
+    #btnAfisare {
+      color: blue;
+      border: 2px solid blue;
+      font-weight: bold;
+      font-family: Verdana;
+    }
+
+    table {
+      border: 2px, solid black;
+    }
+
+    table td,
+    table th {
+      padding: 8px;
+    }
+
+    table th {
+      background-color: #333;
+      color: white;
+    }
+  </style>
+  <script type="text/javascript">
+    let date = [
+      { magazin: 'Mega Image', produs: 'Lapte', luna: 'Ian', vanzari: 5000 },
+      { magazin: 'Carrefour', produs: 'Lapte', luna: 'Ian', vanzari: 7000 },
+      { magazin: 'Lidl', produs: 'Lapte', luna: 'Ian', vanzari: 6000 },
+      { magazin: 'Mega Image', produs: 'Paine', luna: 'Ian', vanzari: 3000 },
+      { magazin: 'Carrefour', produs: 'Paine', luna: 'Ian', vanzari: 4000 },
+      { magazin: 'Lidl', produs: 'Paine', luna: 'Ian', vanzari: 3500 },
+      { magazin: 'Mega Image', produs: 'Lapte', luna: 'Feb', vanzari: 5500 },
+      { magazin: 'Carrefour', produs: 'Lapte', luna: 'Feb', vanzari: 7500 },
+      { magazin: 'Lidl', produs: 'Lapte', luna: 'Feb', vanzari: 6500 },
+      { magazin: 'Mega Image', produs: 'Paine', luna: 'Feb', vanzari: 3200 },
+      { magazin: 'Carrefour', produs: 'Paine', luna: 'Feb', vanzari: 4200 },
+      { magazin: 'Lidl', produs: 'Paine', luna: 'Feb', vanzari: 3700 },
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let btnMinim = document.getElementById('btnMinim');
+      btnMinim.addEventListener('click', () => {
+        let dateMinime = date[0];
+        for (let i = 1; i < date.length; i++) {
+          if (date[i].vanzari < dateMinime.vanzari) {
+            dateMinime = date[i];
+          }
+        }
+        let p = document.createElement('p');
+        p.innerText = `Vanzari minime: ${dateMinime.vanzari}`;
+        document.body.appendChild(p);
+      });
+      let btnAfisare = document.getElementById('btnAfisare');
+      btnAfisare.addEventListener('click', () => {
+        let select = document.getElementById('selectLuna');
+        let luna = select.value;
+        let dateFiltrate = date.filter((item) => item.luna === luna);
+        let tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+        for (let item of dateFiltrate) {
+          let tr = document.createElement('tr');
+          let tdMagazin = document.createElement('td');
+          tdMagazin.innerText = item.magazin;
+          let tdProdus = document.createElement('td');
+          tdProdus.innerText = item.produs;
+          let tdLuna = document.createElement('td');
+          tdLuna.innerText = item.luna;
+          let tdVanzari = document.createElement('td');
+          tdVanzari.innerText = item.vanzari;
+          tr.append(tdMagazin, tdProdus, tdLuna, tdVanzari);
+          tbody.append(tr);
+        }
+      });
+      let btnTotal = document.getElementById('btnTotal');
+      btnTotal.addEventListener('click', () => {
+        let select = document.getElementById('selectLuna');
+        let luna = select.value;
+        let dateFiltrate = date.filter((item) => item.luna === luna);
+        let total = dateFiltrate.reduce((acc, curr) => acc + curr.vanzari, 0);
+        let p = document.createElement('p');
+        p.innerText = `Vanzari totale: ${total}`;
+        document.body.appendChild(p);
+      });
+    });
+  </script>
+  <body>
+    <select id="selectLuna">
+      <option value="Ian">Ianuarie</option>
+      <option value="Feb">Februarie</option>
+    </select>
+
+    <input type="button" id="btnAfisare" value="Afisare" />
+    <input type="button" id="btnMinim" value="Minim" />
+    <input type="button" id="btnTotal" value="Total" />
+
+    <table>
+      <thead>
+        <tr>
+          <th>Magazin</th>
+          <th>Produs</th>
+          <th>Luna</th>
+          <th>Vanzari (RON)</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </body>
+</html>
