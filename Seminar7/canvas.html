@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas</title>
+    <style type="text/css">
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+    <script type="text/javascript">
+      function aplicatie() {
+        const canvas = document.querySelector('canvas');
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+        const canvasContext = canvas.getContext('2d');
+
+        function grafic(V) {
+          const n = V.length;
+          const w = canvasWidth / n;
+          const f = (0.8 * canvasHeight) / Math.max(...V);
+
+          canvasContext.beginPath();
+          for (let i = 0; i < n; i++) {
+            const wi = 0.8 * w;
+            const hi = V[i] * f;
+            const xi = i * w + 0.1 * w;
+            const yi = canvasHeight - hi;
+            canvasContext.rect(xi, yi, wi, hi);
+          }
+          canvasContext.fillStyle = 'hsla(200, 100%, 50%)';
+          canvasContext.strokeStyle = 'black';
+          canvasContext.lineWidth = 2;
+          canvasContext.fill();
+          canvasContext.stroke();
+        }
+        grafic([4, 2, 6, 8]);
+
+        /*
+        canvasContext.fillStyle = 'red';
+        canvasContext.strokeStyle = 'blue';
+        canvasContext.lineWidth = 6;
+
+        canvasContext.fillRect(
+          canvasWidth / 2,
+          canvasHeight / 2,
+          canvasWidth / 2,
+          canvasHeight / 2
+        );
+
+        canvasContext.strokeRect(
+          canvasWidth / 2,
+          canvasHeight / 2,
+          canvasWidth / 2 - 3,
+          canvasHeight / 2 - 3
+        );
+
+        canvasContext.moveTo(canvasWidth / 4, 0);
+        canvasContext.lineTo(canvasWidth / 2, canvasHeight / 2);
+        canvasContext.lineTo(0, canvasHeight / 2);
+        canvasContext.closePath();
+        canvasContext.stroke();
+        canvasContext.fill();
+
+        canvasContext.font = 'bold 24pt Arial';
+        canvasContext.textAlign = 'center';
+        canvasContext.textBaseline = 'middle';
+        canvasContext.fillStyle = 'green';
+        canvasContext.fillText(
+          'Ana are mere',
+          (3 * canvasWidth) / 4,
+          (3 * canvasHeight) / 4
+        );
+        */
+      }
+      document.addEventListener('DOMContentLoaded', aplicatie);
+    </script>
+  </head>
+  <body>
+    <canvas width="800" height="500"></canvas>
+  </body>
+</html>
